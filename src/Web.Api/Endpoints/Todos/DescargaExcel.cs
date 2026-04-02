@@ -269,3 +269,64 @@ internal sealed class DescargaExcel : IEndpoint
         .WithTags(Tags.Todos); // Si requieres autenticación
     }
 }
+
+
+
+
+//public class ExcelServicio : IExcel
+//{
+//    public Task<byte[]> Convertir(ExcelDto excel)
+//    {
+//        // Generar el Excel y obtener el Base64
+//        return Task.FromResult(GenerarExcelEnBase64(excel));
+//    }
+
+//    private static byte[] GenerarExcelEnBase64(ExcelDto excel)
+//    {
+//        using MemoryStream memoryStream = new MemoryStream();
+//        using XLWorkbook workbook = new XLWorkbook();
+//        IXLWorksheet worksheet = workbook.Worksheets.Add("Reporte");
+
+//        int filaActual = 1;
+
+//        // 1️⃣ TÍTULO 
+
+//        int filaTitulo = 4;
+//        IXLCell celdaTitulo = worksheet.Cell(filaTitulo, 1);
+//        celdaTitulo.Value = "REPORTE DE FACTURACIÓN";
+//        celdaTitulo.Style.Font.Bold = true;
+//        celdaTitulo.Style.Font.FontSize = 18;
+//        celdaTitulo.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+
+//        // 2️⃣ ENCABEZADOS AUTOMÁTICOS
+//        List<string> encabezados = excel.Filas.First().Keys.ToList();
+
+//        for (int col = 0; col < encabezados.Count; col++)
+//        {
+//            worksheet.Cell(filaActual, col + 1).Value = encabezados[col];
+//            worksheet.Cell(filaActual, col + 1).Style.Font.Bold = true;
+//            worksheet.Cell(filaActual, col + 1).Style.Fill.BackgroundColor =
+//                XLColor.LightGray;
+//        }
+
+//        int filaDatos = filaActual + 1;
+
+//        // 3️⃣ DATOS
+//        for (int i = 0; i < excel.Filas.Count; i++)
+//        {
+//            var fila = excel.Filas[i];
+
+//            for (int col = 0; col < encabezados.Count; col++)
+//            {
+//                var key = encabezados[col];
+//                worksheet.Cell(filaDatos + i, col + 1).Value =
+//                    fila.ContainsKey(key) ? fila[key] : string.Empty;
+//            }
+//        }
+
+//        worksheet.Columns().AdjustToContents();
+//        workbook.SaveAs(memoryStream);
+
+//        return memoryStream.ToArray();
+//    }
+//}
